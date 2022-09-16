@@ -17,20 +17,19 @@ import com.ibm.userservice.service.UserService;
 public class UserServiceController {
 	@Autowired
     UserService userService;
-	private static Logger log = LoggerFactory.getLogger(UserServiceController.class);
+	
+	private static final Logger log = LoggerFactory.getLogger(UserServiceController.class);
 	
     @PostMapping("/saveUser")
     public ResponseEntity<String> saveUser(@RequestBody User user) {
-   	    System.out.println("user"+user);
-   	    log.debug("saveUser", user);
+   	    log.info("saveUser"+user);
    	    String userResponse = userService.createUser(user); 
    	    return ResponseEntity.status(HttpStatus.OK).body(userResponse);
    	}
     
     @GetMapping("/getUser/{name}")
     public ResponseEntity<User> getUserByName(@PathVariable String name) {
-    	System.out.println("userName"+name);
-    	log.debug("userName", name);
+    	log.info("userName"+name);
     	User userDetails =  userService.getUserByName(name);
     	return ResponseEntity.status(HttpStatus.OK).body(userDetails);
     }
